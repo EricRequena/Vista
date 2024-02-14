@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Vista
 {
-    public class Pacient
+    public class Pacient : Visita
     {
         private int dni;
         private string nom_cognoms;
@@ -20,16 +20,16 @@ namespace Vista
 
         public int Telefon { get { return telefon; } set { telefon = value; } }
 
-        public Pacient(int dni, string nom_cognoms, int telefon)
+        public Pacient(int dni, string nom_cognoms, int telefon, string propietari, string pacient, string motiu) : base(motiu, pacient, propietari)
         {
             DNI = dni;
             Nom_cognom = nom_cognoms;
             Telefon = telefon;
         }
 
-        public void GetPacientInfo()
+        public override string GetInfo()
         {
-            Console.WriteLine($"DNI: {DNI}, Nom_cognom = {Nom_cognom}, Telefon = {Telefon}");
+            return $"DNI: {DNI} | Nom_cognom = {Nom_cognom} | Telefon = {Telefon} |";
         }
     }
 }

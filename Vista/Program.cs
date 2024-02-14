@@ -6,13 +6,21 @@ namespace MySpace
     {
         public static void Main()
         {
-            Pacient MolAno = new Pacient(12345678, "Mol Ano", 666666666);
-            MolAno.GetPacientInfo();
-            Motiu motiu1 = new Motiu("Dolor de cap");
-            motiu1.GetMotiuInfo();
-            Propietari Yo = new Propietari("Eric", "Persona", 18, true);
-            Yo.GetPropietariInfo();
-        }
+            Pacient MolAno = new Pacient(12345678, "Mol Ano", 666666666, "motivo", "MolAno", "Eric");
         
+            Visita visitas = new Visita("motivo", "MolAno", "Eric");
+      
+            Propietari Yo = new Propietari("Eric", "Persona", 18, true, "motivo", "MolAno", "Eric");
+
+
+            Console.WriteLine("-----------------------------------------------------------");
+            Console.WriteLine(MolAno.GetInfo());
+            Console.WriteLine("-----------------------------------------------------------");
+            Console.WriteLine(visitas.GetInfo());
+            Console.WriteLine("-----------------------------------------------------------");
+            Console.WriteLine(Yo.GetInfo());
+            Console.WriteLine("-----------------------------------------------------------");
+
+        }
     }
 }

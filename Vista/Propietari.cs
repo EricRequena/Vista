@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vista
 {
-    public class Propietari
+    public class Propietari : Visita
     {
         private string nom;
         private string raça;
@@ -18,7 +18,7 @@ namespace Vista
         public int Edat { get { return edat; } set { edat = value; } }
         public bool Vacunat { get { return vacunat; } set { vacunat = value; } }
 
-        public Propietari(string nom, string raça, int edat, bool vacunat)
+        public Propietari(string nom, string raça, int edat, bool vacunat, string propietari, string pacient, string motiu) : base(motiu, pacient, propietari)
         {
             Nom = nom;
             Raça = raça;
@@ -26,9 +26,9 @@ namespace Vista
             Vacunat = vacunat;
         }
 
-        public void GetPropietariInfo()
+        public override string GetInfo()
         {
-            Console.WriteLine($"Nom: {Nom}, Raça = {Raça}, Edat = {Edat}, Vacunat = {Vacunat}");
+            return $"Nom: {Nom} | Raça = {Raça} | Edat = {Edat} | Vacunat = {Vacunat} |";
         }
     }
 }
