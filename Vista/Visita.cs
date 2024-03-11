@@ -1,32 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Vista
+namespace OOPVisita
 {
     public class Visita
     {
-        private string motiu;
-        private string pacient;
-        private string propietari;
+        public string Propietari { get; }
+        public string Pacient { get; }
+        public DateTime Data { get; }
+        public string Motiu { get; }
 
-        public string Motiu { get { return motiu; } set { motiu = value; } }
-        public string Pacient { get { return pacient; } set { pacient = value; } }
-        public string Propietari { get { return propietari; } set { propietari = value; } }
-
-        public Visita(string motiu, string pacient, string propietari)
+        public Visita(string propietari, string pacient, DateTime data, string motiu)
         {
-            Motiu = motiu;
-            Pacient = pacient;
             Propietari = propietari;
+            Pacient = pacient;
+            Data = data;
+            Motiu = motiu;
         }
 
-        public virtual string GetInfo()
+        public override string ToString()
         {
-            return $"Motiu = {Motiu} | Pacient = {Pacient} | Propietari = {Propietari} |";
-        }   
+            return $"Propietari: {Propietari}, Pacient: {Pacient}, Data: {Data.ToString("yyyy-MM-dd HH:mm")}, Motiu: {Motiu}";
+        }
 
+        public void DiferenciaAniosMesesDias(DateTime fecha)
+        {
+            DateTime fechaActual = DateTime.Now;
+
+            // Calcula la diferencia total en años, meses y días
+            int anios = fechaActual.Year - fecha.Year;
+            int meses = fechaActual.Month - fecha.Month;
+            int dias = fechaActual.Day - fecha.Day;
+
+            // Corrige los resultados si los días o meses son negativos
+            if (meses < 0 || (meses == 0 && dias < 0))
+            {
+                anios--;
+                meses += 12;
+                if (dias < 0)
+                {
+                    meses--;
+                    dias += DateTime.DaysInMonth(fechaActual.Year, fechaActual.Month);
+                }
+            }
+
+            Console.WriteLine($"Han pasado {anios} años, {meses} meses y {dias} días desde la fecha indicada hasta hoy.");
+        }
     }
 }

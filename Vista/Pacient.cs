@@ -1,35 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using OOPVisita;
 
-namespace Vista
+namespace OOPVisita
 {
     public class Pacient : Visita
     {
-        private int dni;
-        private string nom_cognoms;
-        private int telefon;
+        private string nom;
+        private string raça;
+        private int edat;
+        private bool vacunat;
 
-        public int DNI { get { return dni; } set { dni = value; } } 
-
-        public string Nom_cognom {  get { return nom_cognoms; } set { nom_cognoms = value; } }
-
-        public int Telefon { get { return telefon; } set { telefon = value; } }
-
-        public Pacient(int dni, string nom_cognoms, int telefon, string propietari, string pacient, string motiu) : base(motiu, pacient, propietari)
+        public string Nom
         {
-            DNI = dni;
-            Nom_cognom = nom_cognoms;
-            Telefon = telefon;
+            get { return nom; }
+            set { nom = value; }
         }
 
-        public override string GetInfo()
+        public string Raça
         {
-            return $"DNI: {DNI} | Nom_cognom = {Nom_cognom} | Telefon = {Telefon} |";
+            get { return raça; }
+            set { raça = value; }
         }
+        public int Edat
+        {
+            get { return edat; }
+            set { edat = value; }
+        }
+        public bool Vacunat
+        {
+            get { return vacunat; }
+            set { vacunat = value; }
+        }
+
+        public Pacient(string nom, string raça, int edat, bool vacunat, string propietari, string pacient, DateTime data, string motiu) : base(propietari, pacient, data, motiu)
+        {
+            Nom = nom;
+            Raça = raça;
+            Edat = edat;
+            Vacunat = vacunat;
+        }
+
+        public override string ToString()
+        {
+            return $"PACIENT:   Nom: {Nom}, Raça: {Raça}, Edat: {Edat}, Vacunat: {Vacunat}, {base.ToString()}";
+        }
+
+
     }
 }
