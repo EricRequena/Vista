@@ -3,7 +3,7 @@ using OOPVisita;
 
 namespace OOPVisita
 {
-    public class Pacient : Visita
+    public class Pacient : Visita.
     {
         private string nom;
         private string raça;
