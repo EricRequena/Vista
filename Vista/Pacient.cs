@@ -1,50 +1,55 @@
-﻿using System;
-using OOPVisita;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using M03.UF5._AC1._Tipus_avançats_de_dades_en_C__Requena_Eric; // Asegúrate de que esta referencia esté correctamente configurada
 
-namespace OOPVisita
+namespace UF5
 {
-    public class Pacient : Visita.
+    public class Program
     {
-        private string nom;
-        private string raça;
-        private int edat;
-        private bool vacunat;
-
-        public string Nom
+        public static void Main()
         {
-            get { return nom; }
-            set { nom = value; }
+            const int MAX_SCORES = 3;
+
+            List<Score> scores = new List<Score>();
+
+            for (int i = 0; i < MAX_SCORES; i++)
+            {
+                Console.WriteLine("Enter player name: ");
+                string player = Console.ReadLine();
+                Console.WriteLine("Enter mission name: ");
+                string mission = Console.ReadLine();
+                Console.WriteLine("Enter score: ");
+                int score = Convert.ToInt32(Console.ReadLine());
+                Score s = new Score("", "", 0);
+                s.Player = player;
+                s.Mission = mission;
+                s.Scoring = score;
+                if (s.Player == "" || s.Mission == "" || s.Scoring == 0)
+                {
+                    Console.WriteLine("Invalid values, try again");
+                    i--;
+                    continue;
+                }
+
+                scores.Add(s);
+            }
+
+            List<Score> uniqueScores = GenerateUniqueScores(scores);
+            uniqueScores.Sort();
+            foreach (Score s in uniqueScores)
+            {
+                Console.WriteLine(s);
+            }
         }
 
-        public string Raça
+        public static List<Score> GenerateUniqueScores(List<Score> scores)
         {
-            get { return raça; }
-            set { raça = value; }
+            var uniqueScores = from s in scores
+                               group s by new { s.Player, s.Mission } into g
+                               select new Score(g.Key.Player, g.Key.Mission, g.Max(x => x.Scoring));
+            return uniqueScores.ToList();
         }
-        public int Edat
-        {
-            get { return edat; }
-            set { edat = value; }
-        }
-        public bool Vacunat
-        {
-            get { return vacunat; }
-            set { vacunat = value; }
-        }
-
-        public Pacient(string nom, string raça, int edat, bool vacunat, string propietari, string pacient, DateTime data, string motiu) : base(propietari, pacient, data, motiu)
-        {
-            Nom = nom;
-            Raça = raça;
-            Edat = edat;
-            Vacunat = vacunat;
-        }
-
-        public override string ToString()
-        {
-            return $"PACIENT:   Nom: {Nom}, Raça: {Raça}, Edat: {Edat}, Vacunat: {Vacunat}, {base.ToString()}";
-        }
-
-
     }
 }
